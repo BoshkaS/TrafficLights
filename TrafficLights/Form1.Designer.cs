@@ -31,15 +31,24 @@
             this.components = new System.ComponentModel.Container();
             this.panelwithtraffic = new System.Windows.Forms.Panel();
             this.green_circle = new System.Windows.Forms.Panel();
-            this.yellow_circle = new System.Windows.Forms.Panel();
             this.red_circle = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.yellow_circle = new System.Windows.Forms.Panel();
             this.Start = new System.Windows.Forms.Button();
             this.redTimer = new System.Windows.Forms.Timer(this.components);
             this.yellowTimer = new System.Windows.Forms.Timer(this.components);
             this.greenTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.RedLight = new System.Windows.Forms.Button();
+            this.GreenLight = new System.Windows.Forms.Button();
+            this.YellowLight = new System.Windows.Forms.Button();
+            this.label_red_light = new System.Windows.Forms.Label();
+            this.text_red_light = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.text_yellow_light = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.text_green_light = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panelwithtraffic.SuspendLayout();
             this.red_circle.SuspendLayout();
             this.SuspendLayout();
@@ -65,16 +74,6 @@
             this.green_circle.Visible = false;
             this.green_circle.Paint += new System.Windows.Forms.PaintEventHandler(this.green_circle_Paint);
             // 
-            // yellow_circle
-            // 
-            this.yellow_circle.BackColor = System.Drawing.Color.Transparent;
-            this.yellow_circle.Location = new System.Drawing.Point(48, 119);
-            this.yellow_circle.Name = "yellow_circle";
-            this.yellow_circle.Size = new System.Drawing.Size(100, 65);
-            this.yellow_circle.TabIndex = 0;
-            this.yellow_circle.Visible = false;
-            this.yellow_circle.Paint += new System.Windows.Forms.PaintEventHandler(this.yellow_circle_Paint);
-            // 
             // red_circle
             // 
             this.red_circle.BackColor = System.Drawing.Color.Transparent;
@@ -92,6 +91,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 113);
             this.panel1.TabIndex = 0;
+            // 
+            // yellow_circle
+            // 
+            this.yellow_circle.BackColor = System.Drawing.Color.Transparent;
+            this.yellow_circle.Location = new System.Drawing.Point(48, 119);
+            this.yellow_circle.Name = "yellow_circle";
+            this.yellow_circle.Size = new System.Drawing.Size(100, 65);
+            this.yellow_circle.TabIndex = 0;
+            this.yellow_circle.Visible = false;
+            this.yellow_circle.Paint += new System.Windows.Forms.PaintEventHandler(this.yellow_circle_Paint);
             // 
             // Start
             // 
@@ -127,11 +136,115 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Stop_Click);
             // 
+            // RedLight
+            // 
+            this.RedLight.Font = new System.Drawing.Font("Lasco", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RedLight.Location = new System.Drawing.Point(409, 224);
+            this.RedLight.Name = "RedLight";
+            this.RedLight.Size = new System.Drawing.Size(128, 45);
+            this.RedLight.TabIndex = 3;
+            this.RedLight.Text = "Red";
+            this.RedLight.UseVisualStyleBackColor = true;
+            this.RedLight.Click += new System.EventHandler(this.RedLight_Click);
+            // 
+            // GreenLight
+            // 
+            this.GreenLight.Font = new System.Drawing.Font("Lasco", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GreenLight.Location = new System.Drawing.Point(679, 225);
+            this.GreenLight.Name = "GreenLight";
+            this.GreenLight.Size = new System.Drawing.Size(128, 45);
+            this.GreenLight.TabIndex = 4;
+            this.GreenLight.Text = "Green";
+            this.GreenLight.UseVisualStyleBackColor = true;
+            this.GreenLight.Click += new System.EventHandler(this.GreenLight_Click);
+            // 
+            // YellowLight
+            // 
+            this.YellowLight.Font = new System.Drawing.Font("Lasco", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.YellowLight.Location = new System.Drawing.Point(545, 224);
+            this.YellowLight.Name = "YellowLight";
+            this.YellowLight.Size = new System.Drawing.Size(128, 45);
+            this.YellowLight.TabIndex = 4;
+            this.YellowLight.Text = "Yellow";
+            this.YellowLight.UseVisualStyleBackColor = true;
+            this.YellowLight.Click += new System.EventHandler(this.YellowLight_Click);
+            // 
+            // label_red_light
+            // 
+            this.label_red_light.AutoSize = true;
+            this.label_red_light.Location = new System.Drawing.Point(405, 345);
+            this.label_red_light.Name = "label_red_light";
+            this.label_red_light.Size = new System.Drawing.Size(109, 13);
+            this.label_red_light.TabIndex = 5;
+            this.label_red_light.Text = "Enter time for red light";
+            // 
+            // text_red_light
+            // 
+            this.text_red_light.Location = new System.Drawing.Point(408, 375);
+            this.text_red_light.Name = "text_red_light";
+            this.text_red_light.Size = new System.Drawing.Size(100, 20);
+            this.text_red_light.TabIndex = 6;
+            this.text_red_light.TextChanged += new System.EventHandler(this.text_red_light_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(525, 345);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Enter time for yellow light";
+            // 
+            // text_yellow_light
+            // 
+            this.text_yellow_light.Location = new System.Drawing.Point(532, 375);
+            this.text_yellow_light.Name = "text_yellow_light";
+            this.text_yellow_light.Size = new System.Drawing.Size(100, 20);
+            this.text_yellow_light.TabIndex = 8;
+            this.text_yellow_light.TextChanged += new System.EventHandler(this.text_yellow_light_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(655, 345);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Enter time for green light";
+            // 
+            // text_green_light
+            // 
+            this.text_green_light.Location = new System.Drawing.Point(658, 375);
+            this.text_green_light.Name = "text_green_light";
+            this.text_green_light.Size = new System.Drawing.Size(100, 20);
+            this.text_green_light.TabIndex = 8;
+            this.text_green_light.TextChanged += new System.EventHandler(this.text_green_light_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(335, 305);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(568, 31);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Before writing some text click on button \"Stop\"";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 662);
+            this.ClientSize = new System.Drawing.Size(1322, 436);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.text_yellow_light);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.text_green_light);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.text_red_light);
+            this.Controls.Add(this.label_red_light);
+            this.Controls.Add(this.YellowLight);
+            this.Controls.Add(this.GreenLight);
+            this.Controls.Add(this.RedLight);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.panelwithtraffic);
@@ -140,6 +253,7 @@
             this.panelwithtraffic.ResumeLayout(false);
             this.red_circle.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -155,7 +269,16 @@
         private System.Windows.Forms.Timer yellowTimer;
         private System.Windows.Forms.Timer greenTimer;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button RedLight;
+        private System.Windows.Forms.Button GreenLight;
+        private System.Windows.Forms.Button YellowLight;
+        private System.Windows.Forms.Label label_red_light;
+        private System.Windows.Forms.TextBox text_red_light;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox text_yellow_light;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox text_green_light;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 //using System.Threading;
 using System.Windows.Forms;
-using System.Threading.Tasks;
+
 
 namespace TrafficLights
 {
@@ -58,7 +58,6 @@ namespace TrafficLights
 
         public void Stop()
         {
-            
             switch(Color)
             {
                 case Colors.Red:
@@ -69,6 +68,25 @@ namespace TrafficLights
                     break;
                 case Colors.Green:
                     GreenTimer.Stop();
+                    break;
+            }
+        }
+
+        public void ManualColorSwitch(Colors color)
+        {
+            
+            Stop();
+            ChangeColor(color);
+            switch (color)
+            {
+                case Colors.Red:
+                    RedLight.Visible = true;
+                    break;
+                case Colors.Yellow:
+                    YellowLight.Visible = true;
+                    break;
+                case Colors.Green:
+                    GreenLight.Visible = true;
                     break;
             }
         }

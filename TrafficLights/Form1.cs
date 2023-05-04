@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TrafficLights
@@ -14,12 +15,14 @@ namespace TrafficLights
     {
         public TrafficLight TrafficLight { get; set; }
 
+        private bool direction = true; 
+
         public Form1()
         {
             InitializeComponent();
-            redTimer.Interval = 1000;
-            yellowTimer.Interval = 1000;
-            greenTimer.Interval = 1000;
+            redTimer.Interval = 5000;
+            yellowTimer.Interval = 500;
+            greenTimer.Interval = 3000;
             TrafficLight = new TrafficLight(Colors.Red, redTimer, yellowTimer, greenTimer, red_circle, yellow_circle, green_circle);
         }
 
@@ -81,6 +84,7 @@ namespace TrafficLights
             greenTimer.Stop();
             yellow_circle.Visible = true;
             yellowTimer.Start();
+            direction = false;
         }
 
         private void redTimer_Tick(object sender, EventArgs e)
@@ -91,7 +95,7 @@ namespace TrafficLights
             redTimer.Stop();
             yellow_circle.Visible = true;
             yellowTimer.Start();
-            
+            direction = true;
         }
 
         private void yellowTimer_Tick_toGreen(object sender, EventArgs e)
@@ -108,6 +112,88 @@ namespace TrafficLights
         private void Stop_Click(object sender, EventArgs e)
         {
             TrafficLight.Stop();
+        }
+
+        private void RedLight_Click(object sender, EventArgs e)
+        {
+            switch (TrafficLight.Color)
+            {
+                case Colors.Red:
+                    red_circle.Visible = false;
+                    break;
+                case Colors.Yellow:
+                    if (direction == false)
+                    {
+                        yellowTimer.Tick -= yellowTimer_Tick_toRed;
+                        yellowTimer.Tick += yellowTimer_Tick_toGreen;
+                    }
+                    yellow_circle.Visible = false;
+                    break;
+                case Colors.Green:
+                    green_circle.Visible = false;
+                    yellowTimer.Tick -= yellowTimer_Tick_toRed;
+                    yellowTimer.Tick += yellowTimer_Tick_toGreen;
+                    break;
+            }
+            TrafficLight.ManualColorSwitch(Colors.Red);
+        }
+
+        private void YellowLight_Click(object sender, EventArgs e)
+        {
+            switch (TrafficLight.Color)
+            {
+                case Colors.Red:
+                    red_circle.Visible = false;
+                    break;
+                case Colors.Yellow:
+                    
+                    yellow_circle.Visible = false;
+                    break;
+                case Colors.Green:
+                    green_circle.Visible = false;
+                    break;
+            }
+            TrafficLight.ManualColorSwitch(Colors.Yellow);
+        }
+
+        private void GreenLight_Click(object sender, EventArgs e)
+        {
+            switch (TrafficLight.Color)
+            {
+                case Colors.Red:
+                    red_circle.Visible = false;
+                    yellowTimer.Tick -= yellowTimer_Tick_toGreen;
+                    yellowTimer.Tick += yellowTimer_Tick_toRed;
+                    break;
+                case Colors.Yellow:
+                    if (direction == true)
+                    {
+                        yellowTimer.Tick -= yellowTimer_Tick_toGreen;
+                        yellowTimer.Tick += yellowTimer_Tick_toRed;
+                    }
+                    yellow_circle.Visible = false;
+                    break;
+                case Colors.Green:
+                    green_circle.Visible = false;
+                    
+                    break;
+            }
+            TrafficLight.ManualColorSwitch(Colors.Green);
+        }
+
+        private void text_red_light_TextChanged(object sender, EventArgs e)
+        {
+            redTimer.Interval = Int32.Parse(text_red_light.Text);
+        }
+
+        private void text_yellow_light_TextChanged(object sender, EventArgs e)
+        {
+            yellowTimer.Interval = Int32.Parse(text_yellow_light.Text);
+        }
+
+        private void text_green_light_TextChanged(object sender, EventArgs e)
+        {
+            greenTimer.Interval = Int32.Parse(text_green_light.Text);
         }
     }
 }
